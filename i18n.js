@@ -1332,12 +1332,27 @@ const i18n = function I18n(_OPTS = false) {
    * basic normalization of filepath
    */
   const getStorageFilePath = (locale) => {
+    // only accept plain locale names before building any path.
+    if (!/^[A-Za-z0-9_-]+$/.test(String(locale))) {
+      throw new Error(`i18n: invalid locale "${locale}".`)
+    }
+
     // changed API to use .json as default, #16
     const ext = extension || '.json'
     const filepath = path.normalize(directory + pathsep + prefix + locale + ext)
     const filepathJS = path.normalize(
       directory + pathsep + prefix + locale + '.js'
     )
+
+    // ensure the resolved file stays inside the locales dir
+    const base = path.resolve(directory) + path.sep
+    if (
+      !path.resolve(filepath).startsWith(base) ||
+      !path.resolve(filepathJS).startsWith(base)
+    ) {
+      throw new Error(`i18n: locale "${locale}" escapes the locales directory.`)
+    }
+
     // use .js as fallback if already existing
     try {
       if (fs.statSync(filepathJS)) {
