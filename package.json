@@ -29,7 +29,7 @@
     "@messageformat/core": "^3.4.0",
     "debug": "^4.4.3",
     "fast-printf": "^1.6.10",
-    "make-plural": "^7.4.0",
+    "make-plural": "^7.5.0",
     "math-interval-parser": "^2.0.1",
     "mustache": "^4.2.0"
   },
@@ -44,7 +44,7 @@
     "eslint-plugin-prettier": "^4.2.5",
     "eslint-plugin-promise": "^6.6.0",
     "eslint-plugin-standard": "^5.0.0",
-    "express": "^4.21.2",
+    "express": "^4.22.2",
     "husky": "^8.0.3",
     "lint-staged": "^12.5.0",
     "mocha": "^10.8.2",
@@ -52,8 +52,8 @@
     "prettier": "^2.8.8",
     "should": "^13.2.3",
     "sinon": "^14.0.2",
-    "yaml": "^2.8.1",
-    "supertest": "^6.3.4"
+    "supertest": "^6.3.4",
+    "yaml": "^2.9.0"
   },
   "engines": {
     "node": ">=10"
@@ -70,6 +70,13 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
+    }
+  },
+  "pnpm": {
+    "overrides": {
+      "serialize-javascript": ">=7.0.5",
+      "uuid@<11.1.1": ">=11.1.1",
+      "qs": ">=6.16.0"
     }
   }
 }
